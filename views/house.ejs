@@ -1,13 +1,133 @@
 <!-- views/signup.ejs -->
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<style type="text/css"></style>
-	</head>
-	<body bgcolor="#B2D5FF" link="#666600" vlink="#666600">
-	<!--body bgcolor="#CCDDF2" link="#666600" vlink="#666600"-->
+<!DOCTYPE html>
+<!--
+Template Name: Funzi
+Team Member:
+  - Xiao Hu	    hu440@purdue.edu
+  - Haobo Wang	wang2940@purdue.edu
+  - Yawen Chu   chu110@purdue.edu
+-->
+<html lang="en">
 
-	<img src="images/<%= pinfo.url %>">
+<head>
+<title>Funzi</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link href="layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
+</head>
+<body id="top">
+<!-- ################################################################################################ -->
+<!-- Top Background Image Wrapper -->
+<div class="" style="background-image: url(images/room2.jpg)"> 
+  <!-- ################################################################################################ -->
+  <div class="wrapper row0">
+    <div id="topbar" class="hoc clear"> </div>
+  </div>
 
-	</body>
+  <!-- ################################################################################################ -->
+  <div class="wrapper row1">
+    <header id="header" class="hoc clear"> 
+      <!-- ################################################################################################ -->
+      <div id="logo" class="fl_left">
+        <h1><a href="index.html">Funzi</a></h1>
+      </div>
+      <nav id="mainav" class="fl_right">
+        <ul class="clear">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="post.html">Post</a></li>
+          <li><a href="profile.html">Profile</a></li>
+          <li><a href="login.html">Login</a></li>
+          <li><a class="drop" href="#">Dropdown</a>
+            <ul>
+              <li><a href="#">Level 2</a></li>
+              <li><a class="drop" href="#">Level 2 + Drop</a>
+                <ul>
+                  <li><a href="#">Level 3</a></li>
+                  <li><a href="#">Level 3</a></li>
+                  <li><a href="#">Level 3</a></li>
+                </ul>
+              </li>
+              <li><a href="#">Level 2</a></li>
+            </ul>
+          </li>
+          
+        </ul>
+      </nav>
+      <!-- ################################################################################################ -->
+    </header>
+  </div>
+  <!-- ################################################################################################ -->
+  <div id="pageintro" class="hoc clear"> 
+    <!-- ################################################################################################ -->
+    <article>
+      <p>The Best Residence Seeker</p>
+      <h3 class="heading">********FUNZI*********</h3>
+<!--
+      <footer>
+        <ul class="nospace inline pushright">
+          <li><a class="btn" href="#">Ornare sem ultrices</a></li>
+          <li><a class="btn inverse" href="#">Vestibulum porta</a></li>
+        </ul>
+      </footer>
+-->
+    </article>
+    <!-- ################################################################################################ -->
+  </div>
+</div>
+<!-- End Top Background Image Wrapper -->
+<!-- ################################################################################################ -->
+<div class="wrapper row3">
+  <main class="hoc container clear"> 
+    <!-- main body -->
+    <!-- ################################################################################################ -->
+    <article class="group">
+      <div class="one_half first">
+        <h6 class="heading">Housing Information</h6>
+        <div id="accout_info" class="card">
+            <form action="/more" method="post">
+              Address: <input type="text" name="address" value=<%= pinfo.address %> readonly><br>
+              First Name: <input type="text" name="fname" value=<%= pinfo.fname %> readonly><br>
+              Last Name: <input type="text" name="lname" value=<%= pinfo.lname %> readonly><br>
+              Contact Email: <input type="text" name="email" value=<%= pinfo.email %> readonly><br>
+              Phone Number: <input type="text" name="phone" value=<%= pinfo.phoneno %> readonly><br>
+            </form>
+        </div>
+      </div>
+      <br>
+      <div class="one_half"><a href="#"><img src="images/<%= pinfo.url %>" alt=""></a></div>
+    </article>
+    <!-- ################################################################################################ -->
+    <!-- / main body -->
+    <div class="clear"></div>
+  </main>
+</div>
+<!-- ################################################################################################ -->
+
+<!-- ################################################################################################ -->
+<div class="wrapper row4">
+  <footer id="footer" class="hoc clear"> 
+    <!-- ################################################################################################ -->
+    <a>FUNZI CAN HELP YOU WITH THE BEST LIVING EXPREIENCE NEAR PURDUE AND MORE</a>
+    <!-- ################################################################################################ -->
+  </footer>
+</div>
+    
+<!-- ################################################################################################ -->
+<div class="wrapper row5" style="background-color: #CF9C67">
+  <div id="copyright" class="hoc clear"> 
+    <!-- ################################################################################################ -->
+    <p class="fl_left">Copyright &copy; 2018 - All Rights Reserved - <a href="https://docs.google.com/document/d/e/2PACX-1vR2_HGf58TdvelvZkq0pBo9pN4RriPXWg_ULaiqfyfOw__aGk3bCQrBCVrDr-jK_Qq0c6GM-sZu3iVT/pub">Purdue CS252 Lab06</a></p>
+      
+    <p class="fl_right">Template by <a href="http://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>
+    <!-- ################################################################################################ -->
+  </div>
+</div>
+    
+<!-- ################################################################################################ -->
+
+<!-- JAVASCRIPTS -->
+<script src="layout/scripts/jquery.min.js"></script>
+
+<script src="layout/scripts/jquery.mobilemenu.js"></script>
+</body>
 </html>
