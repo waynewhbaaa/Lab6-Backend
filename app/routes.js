@@ -298,7 +298,7 @@ module.exports = function(app, passport) {
         res.redirect('/');
     });
 
-    //get housing info
+    //get housing info, detailed level
     app.get('/housing', function(req,res){
         console.log('enter info');
         var postid = req.query.postid;
@@ -320,9 +320,10 @@ module.exports = function(app, passport) {
 			}
 		});
     });
+
+    //get the google map search and serve all the posts available to user
+
 };
-	 
-	 
 
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {

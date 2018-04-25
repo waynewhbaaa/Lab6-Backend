@@ -109,7 +109,7 @@
     <header id="header" class="hoc clear"> 
       <!-- ################################################################################################ -->
       <div id="logo" class="fl_left">
-        <h1><a href="index.html">Funzi</a></h1>
+        <h1><a href="/Lab6/index.html">Funzi</a></h1>
       </div>
       <nav id="mainav" class="fl_right">
         <ul class="clear">
@@ -144,21 +144,29 @@
 
 <!-- ################################################################################################ -->
     <button class="btn" type="button" onclick="myFunction()">Yes, I want it</button>
-    <button class="btn" type="button" onclick="clear()">Clear</button>
     <button class="btn" type="button" onclick="midpoint()">Midpoint</button>
-    <button class="btn" type="button" onclick="initMap()">initMap</button>
+    <button class="btn" type="button" onclick="show_midpoint()">SHOW</button>
     <a href="result.html" class="btn">Let's Go!&raquo;</a>
     
     <p id="demo"></p>
     <p id="demo2"></p>
     <a id="demo3"></a>
     <a id="demo4"></a>
+    
+    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+    <div id="map"></div>
 
     <script>
+        // Variables declaration
         var adrs = [];
         var lon = []; var lan = [];
         var count = 0;
         var LAT, LON; 
+        
+        var map;    //The most important var!!!!
+        
+
+    
         function myFunction() {
             var x = document.getElementById("pac-input");
             var currentVal = "No."+count+": "+x.value+"<br>";
@@ -173,17 +181,15 @@
                 lan[count] = results[0].geometry.location.lat();
                 lon[count] = results[0].geometry.location.lng();
 //                alert("TEST: "+lan[count]+", "+lon[count]+". Count: "+count);
-                document.getElementById("demo").innerHTML = lan;   
-                document.getElementById("demo2").innerHTML = lon;   
+//                document.getElementById("demo").innerHTML = lan;   
+//                document.getElementById("demo2").innerHTML = lon;   
             } 
             }); 
             count+=1;
         }
         
-        function clear(){
-            alert("claer!");
-        }
-        
+
+    
         function degr2rad(rad) { return rad * Math.PI / 180; }
         function rad2degr(rad) { return rad * 180 / Math.PI; }
         function midpoint(){
@@ -211,50 +217,24 @@
             var lat = Math.atan2(avgZ, hyp);
             
             LAT = rad2degr(lat);    LON = rad2degr(lng);
+                
+            document.getElementById("demo3").innerHTML = "LAT: "+LAT;   
+            document.getElementById("demo4").innerHTML = "LON: "+LON;   
             
-            document.getElementById("demo3").innerHTML = LAT;   
-            document.getElementById("demo4").innerHTML = LON;   
+//            var myLatLng = {lat: LAT, lng: LON};
+//            var marker = new google.maps.Marker({
+//                position: myLatLng,
+//                map: map,
+//                title: 'Hello World!'
+//            });
+            
+//            marker.setMap(map);
         }
         
-      var map;
-      function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 12,
-          center: new google.maps.LatLng(LAT, LON),
-          mapTypeId: 'terrain'
-        });
 
-        // Create a <script> tag and set the USGS URL as the source.
-        var script = document.createElement('script');
-        script.src = eqfeed_callback({"type":"FeatureCollection","features":[
-            {"type":"Feature","geometry":{"type":"Point","coordinates":[LON,LAT,100]},"id":"first"}]});
     
-        document.getElementsByTagName('head')[0].appendChild(script);
-      }
-
-      // Loop through the results array and place a marker for each
-      // set of coordinates.
-      window.eqfeed_callback = function(results) {
-        for (var i = 0; i < results.features.length; i++) {
-          var coords = results.features[i].geometry.coordinates;
-          var latLng = new google.maps.LatLng(coords[1],coords[0]);
-          var marker = new google.maps.Marker({
-            position: latLng,
-            map: map
-          });
-        }
-      }
-        
-    </script>
-    
-    <!-- ################################################################################################ -->
-    
-    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-    <div id="map"></div>
-    <script>
-    
-      function initAutocomplete() {
-        var map = new google.maps.Map(document.getElementById('map'), {
+        function initAutocomplete() {
+          var map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: 40.425485, lng: -86.914056},
           zoom: 13,
           mapTypeId: 'roadmap'
@@ -328,9 +308,24 @@
     });
     });
       
-      }//end of function
+    }//end of function
 
-    </script>   <!-- initAutocomplete -->
+
+    
+    function show_midpoint() {
+        var myLatLng = {lat: LAT, lng: LON};
+//        marker.setMap(null);
+        var marker = new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+          title: 'THIS IS YOUR MIDPOINT!'
+        });
+    }
+        
+    </script>
+    
+    
+    <!-- ################################################################################################ -->
     
     <script 
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDyHP97j4t5n7txlmNG82g0AUDYMQHWRJU&libraries=places&callback=initAutocomplete"
@@ -343,8 +338,6 @@
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDyHP97j4t5n7txlmNG82g0AUDYMQHWRJU&callback=initMap">
     </script>
 -->
-
-<!-- ################################################################################################ -->
       
 <div class="wrapper row4">
   <footer id="footer" class="hoc clear"> 
