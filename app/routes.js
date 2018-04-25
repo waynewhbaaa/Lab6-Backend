@@ -312,7 +312,7 @@ module.exports = function(app, passport) {
 			}
 			else{
 				console.log('find it');
-				console.log(pinfo.email);
+				console.log(pinfo.address);
 				res.render('house.ejs',{
 					pinfo : pinfo
 				});
