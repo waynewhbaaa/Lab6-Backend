@@ -3,7 +3,7 @@ module.exports = function(app, passport) {
 	var favicon = require('serve-favicon');
     var multer = require('multer'); 
     var fs = require('fs');
-    var c = 0;
+    var c;
 
 	app.use(favicon('favicon.ico'));
     app.use(multer({ dest: '/tmp/'}).array('image'));
@@ -242,26 +242,34 @@ module.exports = function(app, passport) {
                         'hinfo' : req.body.hbio
          }; 
 
-        posti.address = postinfo.address;
-        posti.url = postinfo.url;
-        posti.fname = postinfo.fname;
-        posti.lname = postinfo.lname;
-        posti.phoneno = postinfo.phoneno;
-        posti.email = postinfo.email;
-        posti.hinfo = postinfo.hinfo;
-        posti.count = c;
+        postInfo.count({email: postinfo.email}, function(err, c){
+        	if(err) {
+        		return handleError(err);
+        	}
+        	else{
+        		posti.address = postinfo.address;
+        		posti.url = postinfo.url;
+        		posti.fname = postinfo.fname;
+        		posti.lname = postinfo.lname;
+		        posti.phoneno = postinfo.phoneno;
+		        posti.email = postinfo.email;
+		        posti.hinfo = postinfo.hinfo;
+		        posti.count = c + 1;
 
 
-        console.log(postinfo);
-        posti.save(function(err){
-            if(err){
-                throw err;
-            }
-            else{
-                console.log('store post info in db successfully');
-                c = c + 1;
-            }
-        })
+	        console.log(postinfo);
+    	    posti.save(function(err){
+	            if(err){
+    	            throw err;
+	            }
+    	        else{
+        	        console.log('store post info in db successfully');
+            	}
+        		});
+        	}
+        });
+
+        
 
         res.render('post.ejs', {
             user : req.user
@@ -293,8 +301,25 @@ module.exports = function(app, passport) {
     //get housing info
     app.get('/housing', function(req,res){
         console.log('enter info');
-    });
+        var postid = req.query.postid;
+        var pemail = req.query.email;	
+        console.log(postid);
+        console.log(pemail);
 
+		postInfo.findOne({email: pemail, count: postid}, function(err, pinfo){
+			if(err){
+				return handleError(err);
+			}
+			else{
+				console.log('find it');
+				console.log(pinfo.email);
+				res.render('house.ejs',{
+					pinfo : pinfo
+				});
+
+			}
+		});
+    });
 };
 	 
 	 

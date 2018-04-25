@@ -176,7 +176,7 @@ Team Member:
     if(hp){
 
      <% pinfo.forEach(function(pif){ %>
-          leasing_div.innerHTML += "<li><a href="+"/housing?postid="+ "<%= pif.count %>"  + "&fname=" + "<%= pif.fname %>" + " target='_blank'><%= pif.address %></a><br>";
+          leasing_div.innerHTML += "<li><a href="+"/housing?postid="+ "<%= pif.count %>"  + "&email=" + "<%= pif.email %>" + " target='_blank'><%= pif.address %></a><br>";
      <%  }); %>
     }
     
