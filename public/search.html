@@ -130,6 +130,7 @@
         var lon = []; var lan = [];
         var count = 0;
         var LAT, LON; 
+        var map;    
         
         function myFunction() {
             var x = document.getElementById("pac-input");
@@ -190,7 +191,7 @@
       // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
       function initAutocomplete() {
-        var map = new google.maps.Map(document.getElementById('map'), {
+          map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: 40.425485, lng: -86.914056},
           zoom: 13,
           mapTypeId: 'roadmap'
@@ -250,15 +251,15 @@
         });
       }
         
-    function show_midpoint() {
+      function show_midpoint() {
         var myLatLng = {lat: LAT, lng: LON};
         var marker = new google.maps.Marker({
           position: myLatLng,
           map: map,
-          title: 'THIS IS YOUR MIDPOINT!',
-          icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
+          title: 'THIS IS YOUR MIDPOINT!'
+//          icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
         });
-    }
+      }
         
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6SjLrfqTj8gHxNU2ac1t5tkpeMUAP7Tw&libraries=places&callback=initAutocomplete"
