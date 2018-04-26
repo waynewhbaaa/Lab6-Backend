@@ -194,7 +194,7 @@
 
       function initAutocomplete() {
         var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -33.8688, lng: 151.2195},
+          center: {lat: 40.425485, lng: -86.914056},
           zoom: 13,
           mapTypeId: 'roadmap'
         });
@@ -258,10 +258,22 @@
           map.fitBounds(bounds);
         });
       }
-
+        
+    function show_midpoint() {
+        var myLatLng = {lat: LAT, lng: LON};
+//        marker.setMap(null);
+        var marker = new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+          title: 'THIS IS YOUR MIDPOINT!'
+        });
+    }
+        
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6SjLrfqTj8gHxNU2ac1t5tkpeMUAP7Tw&libraries=places&callback=initAutocomplete"
          async defer></script>
+      
+      
 <div class="wrapper row4">
         <footer id="footer" class="hoc clear"> 
     <!-- ################################################################################################ -->
