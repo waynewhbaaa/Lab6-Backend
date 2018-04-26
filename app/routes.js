@@ -247,25 +247,33 @@ module.exports = function(app, passport) {
         		return handleError(err);
         	}
         	else{
-        		posti.address = postinfo.address;
-        		posti.url = postinfo.url;
-        		posti.fname = postinfo.fname;
-        		posti.lname = postinfo.lname;
-		        posti.phoneno = postinfo.phoneno;
-		        posti.email = postinfo.email;
-		        posti.hinfo = postinfo.hinfo;
-		        posti.count = c + 1;
+                postInfo.count({}, function(err, co){
+                    if(err){
+                        return handleError(err);
+                    }
+                    else{
+                        console.log(co);
+                        posti.address = postinfo.address;
+                        posti.url = postinfo.url;
+                        posti.fname = postinfo.fname;
+                        posti.lname = postinfo.lname;
+                        posti.phoneno = postinfo.phoneno;
+                        posti.email = postinfo.email;
+                        posti.hinfo = postinfo.hinfo;
+                        posti.count = c + 1;
+                        posti.pid = co + 1;
 
-
-	        console.log(postinfo);
-    	    posti.save(function(err){
-	            if(err){
-    	            throw err;
-	            }
-    	        else{
-        	        console.log('store post info in db successfully');
-            	}
-        		});
+                        console.log(postinfo);
+            posti.save(function(err){
+                if(err){
+                    throw err;
+                }
+                else{
+                    console.log('store post info in db successfully');
+                }
+                });
+                    }
+                });
         	}
         });
 
@@ -322,7 +330,9 @@ module.exports = function(app, passport) {
     });
 
     //get the google map search and serve all the posts available to user
-
+    app.get('/search', function(req, res){
+        res.render('search.ejs');
+    });
 };
 
 // route middleware to make sure a user is logged in
