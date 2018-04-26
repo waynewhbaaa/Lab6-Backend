@@ -79,13 +79,13 @@
     <header id="header" class="hoc clear"> 
       <!-- ################################################################################################ -->
       <div id="logo" class="fl_left">
-        <h1><a href="/Lab6/index.html">Funzi</a></h1>
+        <h1><a href="/">Funzi</a></h1>
       </div>
       <nav id="mainav" class="fl_right">
         <ul class="clear">
-          <li class="active"><a href="index.html">Home</a></li>
+          <li class="active"><a href="/">Home</a></li>
             
-          <li><a href="#">Account</a></li>
+          <li><a href="/account">Account</a></li>
             
           <li><a class="drop" href="#">Dropdown</a>
             <ul>
@@ -115,9 +115,9 @@
  <!-- ################################################################################################ -->
     <button class="btn" type="button" onclick="myFunction()">Yes, I want it</button>
     <button class="btn" type="button" onclick="midpoint()">Midpoint</button>
-    <button class="btn" type="button" onclick="show_midpoint()">SHOW</button>
-    <a href="result.html" class="btn">Let's Go!&raquo;</a>
-    
+    <button class="btn" type="button" onclick="getLocation()">SHOW</button>
+    <a href="#" class="btn" onclick='goToPage(event)'>Let's Go!&raquo;</a>
+      
     <p id="demo"></p>
     <p id="demo2"></p>
     <a id="demo3"></a>
@@ -125,6 +125,8 @@
       
     <input id="pac-input" class="controls" type="text" placeholder="Search Box">
     <div id="map"></div>
+<!--    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>-->
+    
     <script>
         // Variables declaration
         var adrs = [];
@@ -239,7 +241,7 @@
               icon: icon,
               title: place.name,
               position: place.geometry.location
-            }));
+           }));
 
             if (place.geometry.viewport) {
               // Only geocodes have viewport.
@@ -251,7 +253,93 @@
           map.fitBounds(bounds);
         });
       }
+
+      function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+        var R = 6371; // Radius of the earth in km
+        var dLat = deg2rad(lat2-lat1);  // deg2rad below
+        var dLon = deg2rad(lon2-lon1); 
+        var a = 
+            Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.cos(degr2rad(lat1)) * Math.cos(degr2rad(lat2)) * 
+            Math.sin(dLon/2) * Math.sin(dLon/2); 
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+        var d = R * c; // Distance in km
+        return Math.abs(d);
+      }  
+      
+
+      var return_msg = "/result?";
+      var address = [];
+      var adrs_lat, adrs_lng;
+      var counter2 = 0;
+      var hids = [];
+      <% apts.forEach(function(apt){ %>
+            address[counter2] = "<%= apt.address %>";
+            hids[counter2] = "<%= apt.pid %>";
+            console.log(address);
+            console.log(hids);
+            counter2+=1;
+      <% }); %>
+       
+      var i;
+      var houseid = [];
+      var j = 0;
+      function getLocation(){
+        for(i = 0; i < counter2; i++){
+            var geocoder = new google.maps.Geocoder();
+            console.log(address[i]);
+            //var houseid = false;
+            //console.log(houseid);
+            
+            
+            geocoder.geocode( { 'address': address[i]}, function(results, status) {
+            
+                //console.log(results);
+            if (status == google.maps.GeocoderStatus.OK) {
+                adrs_lat = results[0].geometry.location.lat();
+                adrs_lng = results[0].geometry.location.lng();
+                alert(adrs_lat+"; "+adrs_lng+"; address:" + address);
+                //Here we set the max radius of our search as 2 miles
+                if(getDistanceFromLatLonInKm(adrs_lat,adrs_lng, LAT, LON) < 3.22){
+                    alert('oh yeah baby');
+                    houseid[j] = true;
+                    console.log(j + ": true");
+                    j = j + 1;
+                }
+                else{
+                    alert('Oof');
+                    houseid[j] = false;
+                    console.log(j + ": false");
+                    j = j + 1;
+                }
+            }
+            });
+        }
         
+    }
+    
+    function deg2rad(degrees){
+        return degrees * Math.PI / 180;
+    }
+      
+        //query string creation
+      function goToPage(event){
+        for(k = 0; k < j - 1; k++){
+            console.log('eleement in houseid: ' + houseid[k]);
+            if(houseid[k] == true && k == 0){
+                return_msg += "pid=" + hids[k];
+            }
+            else if(houseid[k]){
+                return_msg += "&pid=" + hids[k];
+            }
+        }
+          
+            event.preventDefault();
+            window.location=return_msg;
+            
+      }
+        
+                                           
       function show_midpoint() {
         var myLatLng = {lat: LAT, lng: LON};
         var marker = new google.maps.Marker({
@@ -265,12 +353,13 @@
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6SjLrfqTj8gHxNU2ac1t5tkpeMUAP7Tw&libraries=places&callback=initAutocomplete"
          async defer></script>
-      
+            
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
       
 <div class="wrapper row4">
         <footer id="footer" class="hoc clear"> 
     <!-- ################################################################################################ -->
-    <a>写点什么好呢我也不知道啊那就先写在这里空着吧总感觉没有这一行的话显得不是很高端</a>
+    <a>FUNZI CAN HELP YOU WITH THE BEST LIVING EXPREIENCE NEAR PURDUE AND MORE</a>
     <!-- ################################################################################################ -->
   </footer>
 </div>

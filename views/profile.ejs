@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <!--
 Template Name: Funzi
-Team Member:
+eam Member:
   - Xiao Hu     hu440@purdue.edu
   - Haobo Wang  wang2940@purdue.edu
   - Yawen Chu   chu110@purdue.edu
@@ -176,7 +176,10 @@ Team Member:
     if(hp){
 
      <% pinfo.forEach(function(pif){ %>
-          leasing_div.innerHTML += "<li><a href="+"/housing?postid="+ "<%= pif.count %>"  + "&email=" + "<%= pif.email %>" + " target='_blank'><%= pif.address %></a><br>";
+          leasing_div.innerHTML += "<li><a href="+"/housing?postid="+ 
+              "<%= pif.count %>"  + "&email=" + 
+            "<%= pif.email %>" + 
+            " target='_blank'><%= pif.address %></a><br>";
      <%  }); %>
     }
     

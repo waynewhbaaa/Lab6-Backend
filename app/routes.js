@@ -331,7 +331,22 @@ module.exports = function(app, passport) {
 
     //get the google map search and serve all the posts available to user
     app.get('/search', function(req, res){
-        res.render('search.ejs');
+        
+        postInfo.find({}, function(err, pinfo){
+            if(err){
+                return handleError(err);
+            }
+            else{
+                console.log('send all the available posts!');
+                console.log(pinfo);
+
+                res.render('search.ejs', {
+                    apts : pinfo
+                });
+            }
+        });
+
+        
     });
 };
 
