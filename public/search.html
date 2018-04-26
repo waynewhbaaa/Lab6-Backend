@@ -219,11 +219,11 @@
             return;
           }
 
-          // Clear out the old markers.
-          markers.forEach(function(marker) {
-            marker.setMap(null);
-          });
-          markers = [];
+//          // Clear out the old markers.
+//          markers.forEach(function(marker) {
+//            marker.setMap(null);
+//          });
+//          markers = [];
 
           // For each place, get the icon, name and location.
           var bounds = new google.maps.LatLngBounds();
@@ -261,7 +261,6 @@
         
     function show_midpoint() {
         var myLatLng = {lat: LAT, lng: LON};
-//        marker.setMap(null);
         var marker = new google.maps.Marker({
           position: myLatLng,
           map: map,
@@ -294,5 +293,6 @@
 </div>
 
 <script src="https://maps.googleapis.com/maps/api/js?libraries=visualization"></script> 
+
 </body>
 </html>
