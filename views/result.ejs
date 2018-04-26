@@ -53,45 +53,17 @@
   </div>
     
     <div class="wrapper row3">
-        <div id="topbar" class="hoc clear"> </div>
+        <div id="topbar" class="hoc clear" > </div>
     </div>
     
     <div class="contents">
-        <main class="hoc container clear">
+        <main class="hoc container clear" id="contain">
         <div class="bg-white">
-            <div class = "one_half first">
-            <div class="img-inner">
-                <img src="images/apt1.jpg" class="img-responsive" id="myimage" alt="perfect 1">
-            </div> 
-            </div>
-            <div class="one-half">
-                <h2>Perfect place No.1</h2>
-                <p>
-                    <a1>401 W Wood. St</a1><br>
-                    <a1>Lafayette</a1>
-                </p>
-                <h1 style="align-content: space-around">$650</h1>
-            <footer><a class="btn" href="#">More &raquo;</a></footer>
-
-            </div>
+            
         </div> 
             
         <div class="bg-grey">
-            <div class = "one_half first">
-            <div class="img-inner">
-                <img src="images/apt2.jpg" class="img-responsive" id="myimage" alt="perfect 1">
-            </div> 
-            </div>
-            <div class="one-half">
-                <h2>Perfect place No.2</h2>
-                <p>
-                    <a1>402 W Wood. St</a1><br>
-                    <a1>Lafayette</a1>
-                </p>
-                <h1 style="align-content: space-around">$390</h1>
-            <footer><a class="btn" href="#">More &raquo;</a></footer>
-
-            </div>
+            
         </div>
             
         </main>
@@ -120,5 +92,25 @@
 <script src="layout/scripts/jquery.mobilemenu.js"></script>
 <script src="layout/scripts/map.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?libraries=visualization"></script> <!-- Google Map Visualization Library -->
+<script>
+
+  var add1 = "401 W Wood. St. West Lafayette China"
+  var pic1 = "images/apt1.jpg"
+  var add2 = "402 w blah blah blah indiana China"
+  var pic2 = "images/apt2.jpg"
+    
+  var w_div = document.getElementById("contain")
+
+
+  //"<div class='bg-white' id='white'><div class = 'one_half first'><div class='img-inner'><img src="+ pic1 + " class='img-responsive' id='myimage1' alt='perfect 1'></div></div><div class='one-half'><p><a1 id='ad1'>"+ add1+"</a1><br></p><footer><a class='btn' href='#''>More &raquo;</a></footer></div></div>"
+
+
+
+    <% pinfo.forEach(function(pif){ %>
+          w_div.innerHTML += "<div class='bg-white' id='white'><div class = 'one_half first'><div class='img-inner'><img src=images/"+"<%=pif.url %>"+ " class='img-responsive' id='myimage1' alt='perfect 1'></div></div><div class='one-half'><p><a1 id='ad1'>"+  "<%=pif.address %>" + "</a1><br></p><footer><a class='btn' href='/housing?postid=" + "<%= pif.count %>"  + "&email=" + "<%= pif.email %>" + "'>More &raquo;</a></footer></div></div>"
+
+    <%  }); %>
+  
+</script>
 </body>
 </html>
