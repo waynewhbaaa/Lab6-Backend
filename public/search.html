@@ -1,9 +1,16 @@
 <!DOCTYPE html>
+<!-- 
+    Name: Search Webpage
+    Function: Provide the "3-point" location algorithm. 
+-->
+
 <html>
   <head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <title>Places Searchbox</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">  
+    <title>Search</title>
+    <link href="layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
+      
     <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
@@ -63,9 +70,88 @@
     </style>
   </head>
   <body>
+    <div class="wrapper row0">
+    <div id="topbar" class="hoc clear"> </div>
+  </div>
+
+  <div class="wrapper row1">
+    <header id="header" class="hoc clear"> 
+      <!-- ################################################################################################ -->
+      <div id="logo" class="fl_left">
+        <h1><a href="/Lab6/index.html">Funzi</a></h1>
+      </div>
+      <nav id="mainav" class="fl_right">
+        <ul class="clear">
+          <li class="active"><a href="index.html">Home</a></li>
+            
+          <li><a href="#">Account</a></li>
+            
+          <li><a class="drop" href="#">Dropdown</a>
+            <ul>
+              <li><a href="#">Level 2</a></li>
+              <li><a class="drop" href="#">Level 2 + Drop</a>
+                <ul>
+                  <li><a href="#">Level 3</a></li>
+                  <li><a href="#">Level 3</a></li>
+                  <li><a href="#">Level 3</a></li>
+                </ul>
+              </li>
+              <li><a href="#">Level 2</a></li>
+            </ul>
+          </li>
+          
+        </ul>
+      </nav>
+      <!-- ################################################################################################ -->
+    </header>
+  </div>
+    
+  <div class="wrapper row0">
+    <div id="topbar" class="hoc clear"> 
+    </div>
+  </div>
+      
+ <!-- ################################################################################################ -->
+    <button class="btn" type="button" onclick="myFunction()">Yes, I want it</button>
+    <button class="btn" type="button" onclick="midpoint()">Midpoint</button>
+    <button class="btn" type="button" onclick="show_midpoint()">SHOW</button>
+    <a href="result.html" class="btn">Let's Go!&raquo;</a>
+    
+    <p id="demo"></p>
+    <p id="demo2"></p>
+    <a id="demo3"></a>
+    <a id="demo4"></a>
+      
     <input id="pac-input" class="controls" type="text" placeholder="Search Box">
     <div id="map"></div>
     <script>
+        // Variables declaration
+        var adrs = [];
+        var lon = []; var lan = [];
+        var count = 0;
+        var LAT, LON; 
+        
+        function myFunction() {
+            var x = document.getElementById("pac-input");
+            var currentVal = "No."+count+": "+x.value+"<br>";
+            adrs.push(currentVal);
+            document.getElementById("demo").innerHTML = adrs.join(" ");    
+            
+            var geocoder = new google.maps.Geocoder();
+
+            geocoder.geocode( { 'address': x.value}, function(results, status) {
+
+            if (status == google.maps.GeocoderStatus.OK) {
+                lan[count] = results[0].geometry.location.lat();
+                lon[count] = results[0].geometry.location.lng();
+//                alert("TEST: "+lan[count]+", "+lon[count]+". Count: "+count);
+//                document.getElementById("demo").innerHTML = lan;   
+//                document.getElementById("demo2").innerHTML = lon;   
+            } 
+            }); 
+            count+=1;
+        }
+    
       // This example adds a search box to a map, using the Google Place Autocomplete
       // feature. People can enter geographical searches. The search box will return a
       // pick list containing a mix of places and predicted search terms.
@@ -144,5 +230,25 @@
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6SjLrfqTj8gHxNU2ac1t5tkpeMUAP7Tw&libraries=places&callback=initAutocomplete"
          async defer></script>
-  </body>
+<div class="wrapper row4">
+        <footer id="footer" class="hoc clear"> 
+    <!-- ################################################################################################ -->
+    <a>写点什么好呢我也不知道啊那就先写在这里空着吧总感觉没有这一行的话显得不是很高端</a>
+    <!-- ################################################################################################ -->
+  </footer>
+</div>
+    
+<!-- ################################################################################################ -->
+<div class="wrapper row5" style="background-color: #CF9C67">
+  <div id="copyright" class="hoc clear"> 
+    <!-- ################################################################################################ -->
+    <p class="fl_left">Copyright &copy; 2018 - All Rights Reserved - <a href="https://docs.google.com/document/d/e/2PACX-1vR2_HGf58TdvelvZkq0pBo9pN4RriPXWg_ULaiqfyfOw__aGk3bCQrBCVrDr-jK_Qq0c6GM-sZu3iVT/pub">Purdue CS252 Lab06</a></p>
+      
+    <p class="fl_right">Template by <a href="http://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>
+    <!-- ################################################################################################ -->
+  </div>
+</div>
+
+<script src="https://maps.googleapis.com/maps/api/js?libraries=visualization"></script> 
+</body>
 </html>
