@@ -289,7 +289,6 @@
             var geocoder = new google.maps.Geocoder();
             console.log(address[i]);
             //var houseid = false;
-            //console.log(houseid);
             
             
             geocoder.geocode( { 'address': address[i]}, function(results, status) {
@@ -324,7 +323,7 @@
       
         //query string creation
       function goToPage(event){
-        for(k = 0; k < j - 1; k++){
+        for(k = 0; k < j; k++){
             console.log('eleement in houseid: ' + houseid[k]);
             if(houseid[k] == true && k == 0){
                 return_msg += "pid=" + hids[k];
