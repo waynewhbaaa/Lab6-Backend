@@ -144,9 +144,6 @@
             if (status == google.maps.GeocoderStatus.OK) {
                 lan[count] = results[0].geometry.location.lat();
                 lon[count] = results[0].geometry.location.lng();
-//                alert("TEST: "+lan[count]+", "+lon[count]+". Count: "+count);
-//                document.getElementById("demo").innerHTML = lan;   
-//                document.getElementById("demo2").innerHTML = lon;   
             } 
             }); 
             count+=1;
@@ -219,12 +216,6 @@
             return;
           }
 
-//          // Clear out the old markers.
-//          markers.forEach(function(marker) {
-//            marker.setMap(null);
-//          });
-//          markers = [];
-
           // For each place, get the icon, name and location.
           var bounds = new google.maps.LatLngBounds();
           places.forEach(function(place) {
@@ -264,7 +255,8 @@
         var marker = new google.maps.Marker({
           position: myLatLng,
           map: map,
-          title: 'THIS IS YOUR MIDPOINT!'
+          title: 'THIS IS YOUR MIDPOINT!',
+          icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
         });
     }
         
