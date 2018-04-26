@@ -85,11 +85,12 @@ Team Member:
         <h6 class="heading">Housing Information</h6>
         <div id="accout_info" class="card">
             <form action="/more" method="post">
-              Address: <input type="text" name="address" value="<%= pinfo.address %>" readonly><br>
+              Address: <textarea name="address" rows = "1" cols = "50" class="overflow" readonly><%= pinfo.address %></textarea><br>
               First Name: <input type="text" name="fname" value=<%= pinfo.fname %> readonly><br>
               Last Name: <input type="text" name="lname" value=<%= pinfo.lname %> readonly><br>
               Contact Email: <input type="text" name="email" value=<%= pinfo.email %> readonly><br>
               Phone Number: <input type="text" name="phone" value=<%= pinfo.phoneno %> readonly><br>
+              Information: <textarea name="bio" rows = "5" cols = "50" class="overflow" readonly><%= pinfo.hinfo %></textarea><br>
             </form>
         </div>
       </div>

@@ -327,6 +327,7 @@ module.exports = function(app, passport) {
 
 			}
 		});
+
     });
 
     //get the google map search and serve all the posts available to user
@@ -345,9 +346,21 @@ module.exports = function(app, passport) {
                 });
             }
         });
-
-        
     });
+
+    //get the result req, find the query and return the specific posts.
+
+    app.get('/result', function(req, res){
+        for(var qname in req.query){
+            postInfo.find({pid: {$in: req.query[qname]}}, function(err, pinfo){
+                console.log(pinfo);
+                res.render('result.ejs', {
+                    pinfo : pinfo
+                });
+            });
+        }
+    });
+
 };
 
 // route middleware to make sure a user is logged in

@@ -293,11 +293,11 @@
             
             geocoder.geocode( { 'address': address[i]}, function(results, status) {
             
-                //console.log(results);
+                console.log(results);
             if (status == google.maps.GeocoderStatus.OK) {
                 adrs_lat = results[0].geometry.location.lat();
                 adrs_lng = results[0].geometry.location.lng();
-                alert(adrs_lat+"; "+adrs_lng+"; address:" + address);
+                alert(adrs_lat+"; "+adrs_lng);
                 //Here we set the max radius of our search as 2 miles
                 if(getDistanceFromLatLonInKm(adrs_lat,adrs_lng, LAT, LON) < 3.22){
                     alert('oh yeah baby');
@@ -323,10 +323,12 @@
       
         //query string creation
       function goToPage(event){
+          var ct = 0;
         for(k = 0; k < j; k++){
             console.log('eleement in houseid: ' + houseid[k]);
-            if(houseid[k] == true && k == 0){
+            if(houseid[k] == true && ct == 0){
                 return_msg += "pid=" + hids[k];
+                ct++;
             }
             else if(houseid[k]){
                 return_msg += "&pid=" + hids[k];
