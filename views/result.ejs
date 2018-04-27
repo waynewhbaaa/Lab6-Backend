@@ -27,25 +27,11 @@
       </div>
       <nav id="mainav" class="fl_right">
         <ul class="clear">
-          <li class="active"><a href="/index">Home</a></li>
+          <li class="active"><a href="/">Home</a></li>
         
           <li><a href="/post">Post</a></li>
           <li><a href="/account">Account</a></li>
-        
-          <li><a class="drop" href="#">Dropdown</a>
-            <ul>
-              <li><a href="#">Level 2</a></li>
-              <li><a class="drop" href="#">Level 2 + Drop</a>
-                <ul>
-                  <li><a href="#">Level 3</a></li>
-                  <li><a href="#">Level 3</a></li>
-                  <li><a href="#">Level 3</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Level 2</a></li>
-            </ul>
-          </li>
-          
+
         </ul>
       </nav>
       <!-- ################################################################################################ -->
@@ -107,7 +93,7 @@
 
 
     <% pinfo.forEach(function(pif){ %>
-          w_div.innerHTML += "<div class='bg-white' id='white'><div class = 'one_half first'><div class='img-inner'><img src=images/"+"<%=pif.url %>"+ " class='img-responsive' id='myimage1' alt='perfect 1'></div></div><div class='one-half'><p><a1 id='ad1'>"+  "<%=pif.address %>" + "</a1><br></p><footer><a class='btn' href='/housing?postid=" + "<%= pif.count %>"  + "&email=" + "<%= pif.email %>" + "'>More &raquo;</a></footer></div></div>"
+          w_div.innerHTML += "<div class='bg-white' id='white'><div class = 'one_half first'><div class='img-inner'><img src=/imagehouse?pid="+"<%= pif.pid %>"+ " class='img-responsive' id='myimage1' alt='perfect 1'></div></div><div class='one-half'><p><a1 id='ad1'>"+  "<%=pif.address %>" + "</a1><br></p><footer><a class='btn' href='/housing?postid=" + "<%= pif.count %>"  + "&email=" + "<%= pif.email %>" + "'>More &raquo;</a></footer></div></div>"
 
     <%  }); %>
   

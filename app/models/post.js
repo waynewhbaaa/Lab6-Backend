@@ -4,7 +4,7 @@ var postSchema = mongoose.Schema({
 	email : String,
 	address : String,
 	//actually it is the name of the image by the file uploead
-	url : String,
+	url : { data : Buffer, contentType: String },
 	fname : String,
 	lname : String,
 	phoneno : String,

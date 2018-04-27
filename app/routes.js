@@ -218,20 +218,7 @@ module.exports = function(app, passport) {
     app.post('/post', isLoggedIn, function(req, res){
         //first we need to store the picture in our own server and pass the name to our db
        // console.log(req.files[0]);
-        var des_file = __dirname + "/../public/images/" + req.files[0].originalname;
-        fs.readFile(req.files[0].path, function(err, data){
-            fs.writeFile(des_file, data, function(err, data){
-                if(err){
-                    console.log(err);
-                } 
-                else{
-                    console.log('file store in folder successfully');
-                }
-
-            });
-        });
-
-        var posti = new postInfo();
+       var posti = new postInfo();
         console.log(req.user.local.email);
         var postinfo = {'address' : req.body.address,
                         'url' : req.files[0].originalname,                         
@@ -242,11 +229,26 @@ module.exports = function(app, passport) {
                         'hinfo' : req.body.hbio
          }; 
 
-        postInfo.count({email: postinfo.email}, function(err, c){
-        	if(err) {
-        		return handleError(err);
-        	}
-        	else{
+        var des_file = __dirname + "/../public/images/" + req.files[0].originalname;
+        fs.readFile(req.files[0].path, function(err, data){
+            // fs.writeFile(des_file, data, function(err, data){
+            //     if(err){
+            //         console.log(err);
+            //     } 
+            //     else{
+            //         console.log('file store in folder successfully');
+            //     }
+
+            // });
+            posti.url.data = data;
+            posti.url.contentType = 'image/jpg';
+
+
+            postInfo.count({email: postinfo.email}, function(err, c){
+            if(err) {
+                return handleError(err);
+            }
+            else{
                 postInfo.count({}, function(err, co){
                     if(err){
                         return handleError(err);
@@ -254,7 +256,7 @@ module.exports = function(app, passport) {
                     else{
                         console.log(co);
                         posti.address = postinfo.address;
-                        posti.url = postinfo.url;
+                        //posti.url = postinfo.url;
                         posti.fname = postinfo.fname;
                         posti.lname = postinfo.lname;
                         posti.phoneno = postinfo.phoneno;
@@ -274,14 +276,36 @@ module.exports = function(app, passport) {
                 });
                     }
                 });
-        	}
+            }
         });
 
-        
+
+        });
+
 
         res.render('post.ejs', {
             user : req.user
         });
+    });
+
+
+    app.get('/imagehouse', function(req,res){
+        console.log('send image');
+        var img = req.query.pid;
+        console.log(img);
+        postInfo.findOne({pid: img}, function(err, imgurl){
+            if(err){
+                return handleError(err);
+            }
+            else{
+                console.log('read from link');
+                console.log(imgurl.hinfo);
+                res.contentType(imgurl.url.contentType);
+                res.send(imgurl.url.data);
+            }
+        });
+        
+
     });
 
 	// process the signup form
